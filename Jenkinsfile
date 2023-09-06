@@ -20,14 +20,28 @@ pipeline {
            }
        }
    }
-     post { 
+    post {
+        always {
+            // Gerar relatório Mochawesome
+            script {
+                def reportDir = 'cypress/reports/mochawesome-report'
 
-       always { 
+                bat "mkdir -p ${reportDir}"
+                bat 'npx mochawesome-merge cypress/results/*.json > ' + "${reportDir}/mochawesome.json"
+                bat 'npx marge ' + "${reportDir}/mochawesome.json -o ${reportDir}"
+            }
 
-           publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'mochawesome-report', reportFiles: 'mochawesome.html', reportName: 'HTML Report', reportTitles: '']) 
-
-           cleanWs() 
-
-       } 
-   }
+            // Publicar relatório HTML no Jenkins
+            publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: 'cypress/report/mochawesome-report',
+                reportFiles: 'index.html',
+                reportName: 'Cypress Mochawesome Report',
+                reportTitles: 'Cypress Test Report'
+            ])
+            cleanWs()
+        }
+    }
 }

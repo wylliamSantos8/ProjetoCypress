@@ -26,7 +26,7 @@ pipeline {
             script {
                 def reportDir = 'cypress/reports/html'
 
-                bat "mkdir -p ${reportDir}"
+                //bat "mkdir -p ${reportDir}"
                 bat 'npx mochawesome-merge cypress/results/*.json > ' + "${reportDir}/mochawesome.json"
                 bat 'npx marge ' + "${reportDir}/mochawesome.json -o ${reportDir}"
             }

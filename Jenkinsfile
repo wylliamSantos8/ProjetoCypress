@@ -7,11 +7,12 @@ pipeline {
        stage('Dependencies') {
            steps {
                sh 'npm i'
+               sh 'npm install lambdatest-cypress-cli'
            }
        }
        stage('e2e Tests') {
            steps {
-               sh 'npm run cypress'
+               sh 'npm run cypress:lambda'
            }
        }
        stage('Deploy') {

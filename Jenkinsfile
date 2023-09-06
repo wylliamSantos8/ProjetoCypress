@@ -24,7 +24,7 @@ pipeline {
         always {
             // Gerar relatório Mochawesome
             script {
-                def reportDir = 'cypress/reports/mochawesome-report'
+                def reportDir = 'cypress/reports/html'
 
                 bat "mkdir -p ${reportDir}"
                 bat 'npx mochawesome-merge cypress/results/*.json > ' + "${reportDir}/mochawesome.json"
@@ -36,7 +36,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: 'cypress/report/mochawesome-report',
+                reportDir: 'cypress/reports/html',
                 reportFiles: 'index.html',
                 reportName: 'Cypress Mochawesome Report',
                 reportTitles: 'Cypress Test Report'

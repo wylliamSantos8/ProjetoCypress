@@ -31,7 +31,6 @@ pipeline {
                 reportName: 'Cypress Mochawesome Report',
                 reportTitles: 'Cypress Test Report'
             ])
-            cleanWs()
         }
     }
 }

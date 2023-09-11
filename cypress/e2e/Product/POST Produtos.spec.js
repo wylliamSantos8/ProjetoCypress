@@ -9,7 +9,7 @@
 // what makes it such an awesome testing tool,
 // please read our getting started guide:
 // https://on.cypress.io/introduction-to-cypress
-describe('example to-do app', function () {
+describe('POST Produtos', function () {
     beforeEach(function () {
         // Cypress starts out with a blank slate for each test
         // so we must tell it to visit our website with the `cy.visit()` command.

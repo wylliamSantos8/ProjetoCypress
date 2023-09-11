@@ -22,16 +22,6 @@ pipeline {
    }
     post {
         always {
-            // Gerar relatório Mochawesome
-            script {
-                def reportDir = 'cypress/reports/html'
-
-                //bat "mkdir -p ${reportDir}"
-                bat 'npx mochawesome-merge cypress/results/*.json > ' + "${reportDir}/mochawesome.json"
-                bat 'npx marge ' + "${reportDir}/mochawesome.json -o ${reportDir}"
-            }
-
-            // Publicar relatório HTML no Jenkins
             publishHTML(target: [
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
